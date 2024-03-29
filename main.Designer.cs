@@ -34,6 +34,8 @@
             transactionsToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             reportsToolStripMenuItem = new ToolStripMenuItem();
+            warehouseReportToolStripMenuItem = new ToolStripMenuItem();
+            profitabilityToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -45,6 +47,7 @@
             menuStrip1.Size = new Size(1043, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
+          
             // 
             // toolStripMenuItem1
             // 
@@ -56,9 +59,9 @@
             // transactionsToolStripMenuItem
             // 
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            transactionsToolStripMenuItem.Size = new Size(139, 22);
+            transactionsToolStripMenuItem.Size = new Size(180, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
-            transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
+           
             // 
             // toolStripMenuItem2
             // 
@@ -67,9 +70,22 @@
             // 
             // reportsToolStripMenuItem
             // 
+            reportsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { warehouseReportToolStripMenuItem, profitabilityToolStripMenuItem });
             reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             reportsToolStripMenuItem.Size = new Size(59, 20);
             reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // warehouseReportToolStripMenuItem
+            // 
+            warehouseReportToolStripMenuItem.Name = "warehouseReportToolStripMenuItem";
+            warehouseReportToolStripMenuItem.Size = new Size(135, 22);
+            warehouseReportToolStripMenuItem.Text = "Warehouse";
+            // 
+            // profitabilityToolStripMenuItem
+            // 
+            profitabilityToolStripMenuItem.Name = "profitabilityToolStripMenuItem";
+            profitabilityToolStripMenuItem.Size = new Size(135, 22);
+            profitabilityToolStripMenuItem.Text = "Profitability";
             // 
             // Main
             // 
@@ -97,5 +113,7 @@
         private ToolStripMenuItem transactionsToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem reportsToolStripMenuItem;
+        private ToolStripMenuItem warehouseReportToolStripMenuItem;
+        private ToolStripMenuItem profitabilityToolStripMenuItem;
     }
 }
