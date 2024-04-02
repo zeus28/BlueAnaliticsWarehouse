@@ -1,4 +1,6 @@
 ﻿using BlueAnaliticsWarehouse.model;
+using BlueAnaliticsWarehouse.Model.DTOs;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,56 +14,36 @@ using System.Windows.Forms;
 
 namespace BlueAnaliticsWarehouse
 {
-    public partial class WarehouseReport : Form
+    public partial class Profitability : Form
     {
-        public WarehouseReport()
+        public Profitability()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Profitability_Load(object sender, EventArgs e)
         {
-            using (var ctx = new BlueAnaliticsContext())
-            {
+            this.dtFrom.Value = DateTime.Today.AddYears(-1);
+            this.dtTo.Value = DateTime.Today;
 
-
-                var fromDate = new Microsoft.Data.SqlClient.SqlParameter("@fromDate", this.dtFrom.Value);
-                var toDate = new Microsoft.Data.SqlClient.SqlParameter("@toDate", this.dtTo.Value);
-                var productId = new Microsoft.Data.SqlClient.SqlParameter("@productId", cboProducts.SelectedValue == null ? DBNull.Value : cboProducts.SelectedValue);
-                var warId = new Microsoft.Data.SqlClient.SqlParameter("@warId", Convert.ToInt32(cboWarehouse.SelectedValue));
-
-                var r = ctx.Database.SqlQueryRaw<Model.DTOs.WarehouseReportDTO>($"exec getStockDetailsPerWareHouse @fromDate , @toDate , @productId , @warId", fromDate, toDate, productId, warId).ToList();
-                this.dataGridView1.DataSource = r;
-                //this.dataGridView1.DataMember = "WarehouseReportDTO";
-
-            }
-        }
-
-        private void WarehouseReport_Load(object sender, EventArgs e)
-        {
             try
             {
 
                 using (var ctx = new BlueAnaliticsContext())
                 {
+
                     var w = ctx.Warehouses.ToList();
                     this.cboWarehouse.DataSource = w;
                     this.cboWarehouse.ValueMember = "WarId";
                     this.cboWarehouse.DisplayMember = "WarName";
                     this.cboWarehouse.SelectedIndex = -1;
                     this.cboWarehouse.Focus();
-
-                    this.dtFrom.Value = DateTime.Today.AddYears(-1);
-                    this.cboProducts.Enabled = false;
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
         }
 
         private void cboWarehouse_SelectionChangeCommitted(object sender, EventArgs e)
@@ -87,9 +69,36 @@ namespace BlueAnaliticsWarehouse
             }
         }
 
-        private void WarehouseReport_FormClosing(object sender, FormClosingEventArgs e)
+        private void Profitability_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.Hide();
+        }
+
+        private void ProfitabilityReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (var ctx = new BlueAnaliticsContext()) {
+
+
+                    var fromDate = new Microsoft.Data.SqlClient.SqlParameter("@fromDate", this.dtFrom.Value);
+                    var toDate = new Microsoft.Data.SqlClient.SqlParameter("@toDate", this.dtTo.Value);
+                    var productId = new Microsoft.Data.SqlClient.SqlParameter("@productId", cboProducts.SelectedValue == null ? DBNull.Value : cboProducts.SelectedValue);
+                    var warId = new Microsoft.Data.SqlClient.SqlParameter("@warId", Convert.ToInt32(cboWarehouse.SelectedValue));
+
+                    var qparams = new SqlParameter[] { fromDate, toDate, warId, productId };
+                      
+
+                    var r = ctx.Database.SqlQueryRaw<ProfitabilityDTO>("exec [dbo].[getProfitabilityData] @fromDate,@toDate,@warId, @productId " , qparams).ToList();
+                    this.dataGridView1.DataSource = r;
+
+                }
+
+            }
+            catch (Exception ex) { 
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

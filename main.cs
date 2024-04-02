@@ -18,23 +18,29 @@ namespace BlueAnaliticsWarehouse
     {
         public frmTransactions TransactionForm;
         public WarehouseReport WarehouseReport;
+        public Profitability Profitability;
         Dictionary<string, Form> dictClickedForm = new Dictionary<string, Form>();
         public Main()
         {
             InitializeComponent();
             TransactionForm = new frmTransactions();
             WarehouseReport = new WarehouseReport();
+            Profitability = new Profitability();
 
             TransactionForm.MdiParent = this;
             WarehouseReport.MdiParent = this;
+            Profitability.MdiParent = this;
+
         }
 
-       
+
 
         private void Main_Load(object sender, EventArgs e)
         {
             dictClickedForm.Add("Transactions", this.TransactionForm);
             dictClickedForm.Add("Warehouse", this.WarehouseReport);
+            dictClickedForm.Add("Profitability", this.Profitability);
+
             SubscribeToClickEvents(this.menuStrip1.Items);
         }
         private void SubscribeToClickEvents(ToolStripItemCollection items)
@@ -61,7 +67,8 @@ namespace BlueAnaliticsWarehouse
             {
                 // Use the clicked item
                 //MessageBox.Show("Clicked item: " + clickedItem.Text);
-                if (dictClickedForm.ContainsKey(clickedItem.Text)) {
+                if (dictClickedForm.ContainsKey(clickedItem.Text))
+                {
                     dictClickedForm[clickedItem.Text].Show();
                 }
                 // You can also perform other actions based on the clicked item

@@ -13,7 +13,7 @@ namespace BlueAnaliticsWarehouse.Model.DTOs
         public int ItemsIn { get; set; }
         public int ItemsOut { get; set; }
         public int BeginningStock { get; set; }
-        public int? CurrentStock { get; set; }
+        public int CurrentStock { get; set; }
 
     }
 }
