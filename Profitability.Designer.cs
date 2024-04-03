@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dtFrom = new DateTimePicker();
             dtTo = new DateTimePicker();
             label1 = new Label();
@@ -38,7 +39,9 @@
             label4 = new Label();
             dataGridView1 = new DataGridView();
             ProfitabilityReport = new Button();
+            errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // dtFrom
@@ -85,6 +88,7 @@
             cboWarehouse.Size = new Size(139, 23);
             cboWarehouse.TabIndex = 4;
             cboWarehouse.SelectionChangeCommitted += cboWarehouse_SelectionChangeCommitted;
+            cboWarehouse.Validating += cboWarehouse_Validating;
             // 
             // cboProducts
             // 
@@ -131,6 +135,10 @@
             ProfitabilityReport.UseVisualStyleBackColor = true;
             ProfitabilityReport.Click += ProfitabilityReport_Click;
             // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
             // Profitability
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -155,6 +163,7 @@
             FormClosing += Profitability_FormClosing;
             Load += Profitability_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -171,5 +180,6 @@
         private Label label4;
         private DataGridView dataGridView1;
         private Button ProfitabilityReport;
+        private ErrorProvider errorProvider1;
     }
 }

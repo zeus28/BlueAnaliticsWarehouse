@@ -34,6 +34,17 @@ namespace BlueAnaliticsWarehouse
             components = new System.ComponentModel.Container();
             cboWareHouse = new ComboBox();
             dataGridView1 = new DataGridView();
+            warehouseNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            UnitPrice = new DataGridViewTextBoxColumn();
+            transdateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            transtypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
+            customerFriendlyNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            warprodidDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            userIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            customerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             transactionDTOBindingSource = new BindingSource(components);
             cboProducts = new ComboBox();
             nfQty = new NumericUpDown();
@@ -52,17 +63,6 @@ namespace BlueAnaliticsWarehouse
             cboCustomer = new ComboBox();
             label6 = new Label();
             btnMovingAvg = new Button();
-            warehouseNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            productNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            UnitPrice = new DataGridViewTextBoxColumn();
-            transdateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            transtypeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            quantityDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            Total = new DataGridViewTextBoxColumn();
-            customerFriendlyNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            warprodidDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            userIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            customerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)transactionDTOBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nfQty).BeginInit();
@@ -93,13 +93,88 @@ namespace BlueAnaliticsWarehouse
             dataGridView1.Size = new Size(828, 286);
             dataGridView1.TabIndex = 0;
             // 
+            // warehouseNameDataGridViewTextBoxColumn
+            // 
+            warehouseNameDataGridViewTextBoxColumn.DataPropertyName = "WarehouseName";
+            warehouseNameDataGridViewTextBoxColumn.HeaderText = "Warehouse";
+            warehouseNameDataGridViewTextBoxColumn.Name = "warehouseNameDataGridViewTextBoxColumn";
+            warehouseNameDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // productNameDataGridViewTextBoxColumn
+            // 
+            productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
+            productNameDataGridViewTextBoxColumn.HeaderText = "Product";
+            productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
+            productNameDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // UnitPrice
+            // 
+            UnitPrice.DataPropertyName = "UnitPrice";
+            UnitPrice.HeaderText = "UnitPrice";
+            UnitPrice.Name = "UnitPrice";
+            // 
+            // transdateDataGridViewTextBoxColumn
+            // 
+            transdateDataGridViewTextBoxColumn.DataPropertyName = "trans_date";
+            transdateDataGridViewTextBoxColumn.HeaderText = "Date";
+            transdateDataGridViewTextBoxColumn.Name = "transdateDataGridViewTextBoxColumn";
+            // 
+            // transtypeDataGridViewTextBoxColumn
+            // 
+            transtypeDataGridViewTextBoxColumn.DataPropertyName = "trans_type";
+            transtypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            transtypeDataGridViewTextBoxColumn.Name = "transtypeDataGridViewTextBoxColumn";
+            transtypeDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            quantityDataGridViewTextBoxColumn.DataPropertyName = "quantity";
+            quantityDataGridViewTextBoxColumn.HeaderText = "QTY";
+            quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
+            quantityDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // Total
+            // 
+            Total.DataPropertyName = "Total";
+            Total.HeaderText = "Total";
+            Total.Name = "Total";
+            Total.ReadOnly = true;
+            Total.Width = 80;
+            // 
+            // customerFriendlyNameDataGridViewTextBoxColumn
+            // 
+            customerFriendlyNameDataGridViewTextBoxColumn.DataPropertyName = "CustomerFriendlyName";
+            customerFriendlyNameDataGridViewTextBoxColumn.HeaderText = "Contact";
+            customerFriendlyNameDataGridViewTextBoxColumn.Name = "customerFriendlyNameDataGridViewTextBoxColumn";
+            customerFriendlyNameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // warprodidDataGridViewTextBoxColumn
+            // 
+            warprodidDataGridViewTextBoxColumn.DataPropertyName = "war_prod_id";
+            warprodidDataGridViewTextBoxColumn.HeaderText = "war_prod_id";
+            warprodidDataGridViewTextBoxColumn.Name = "warprodidDataGridViewTextBoxColumn";
+            warprodidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // userIdDataGridViewTextBoxColumn
+            // 
+            userIdDataGridViewTextBoxColumn.DataPropertyName = "userId";
+            userIdDataGridViewTextBoxColumn.HeaderText = "userId";
+            userIdDataGridViewTextBoxColumn.Name = "userIdDataGridViewTextBoxColumn";
+            userIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // customerIdDataGridViewTextBoxColumn
+            // 
+            customerIdDataGridViewTextBoxColumn.DataPropertyName = "customerId";
+            customerIdDataGridViewTextBoxColumn.HeaderText = "customerId";
+            customerIdDataGridViewTextBoxColumn.Name = "customerIdDataGridViewTextBoxColumn";
+            customerIdDataGridViewTextBoxColumn.Visible = false;
+            // 
             // transactionDTOBindingSource
             // 
             transactionDTOBindingSource.DataSource = typeof(TransactionDTO);
             // 
             // cboProducts
             // 
-            cboProducts.CausesValidation = false;
             cboProducts.Enabled = false;
             cboProducts.FormattingEnabled = true;
             cboProducts.Location = new Point(163, 49);
@@ -225,6 +300,7 @@ namespace BlueAnaliticsWarehouse
             cboCustomer.Name = "cboCustomer";
             cboCustomer.Size = new Size(134, 23);
             cboCustomer.TabIndex = 15;
+            cboCustomer.Validating += cboCustomer_Validating;
             // 
             // label6
             // 
@@ -244,82 +320,6 @@ namespace BlueAnaliticsWarehouse
             btnMovingAvg.Text = "View Moving Average";
             btnMovingAvg.UseVisualStyleBackColor = true;
             btnMovingAvg.Click += btnMovingAvg_Click;
-            // 
-            // warehouseNameDataGridViewTextBoxColumn
-            // 
-            warehouseNameDataGridViewTextBoxColumn.DataPropertyName = "WarehouseName";
-            warehouseNameDataGridViewTextBoxColumn.HeaderText = "Warehouse";
-            warehouseNameDataGridViewTextBoxColumn.Name = "warehouseNameDataGridViewTextBoxColumn";
-            warehouseNameDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // productNameDataGridViewTextBoxColumn
-            // 
-            productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            productNameDataGridViewTextBoxColumn.HeaderText = "Product";
-            productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
-            productNameDataGridViewTextBoxColumn.Width = 120;
-            // 
-            // UnitPrice
-            // 
-            UnitPrice.DataPropertyName = "UnitPrice";
-            UnitPrice.HeaderText = "UnitPrice";
-            UnitPrice.Name = "UnitPrice";
-            // 
-            // transdateDataGridViewTextBoxColumn
-            // 
-            transdateDataGridViewTextBoxColumn.DataPropertyName = "trans_date";
-            transdateDataGridViewTextBoxColumn.HeaderText = "Date";
-            transdateDataGridViewTextBoxColumn.Name = "transdateDataGridViewTextBoxColumn";
-            // 
-            // transtypeDataGridViewTextBoxColumn
-            // 
-            transtypeDataGridViewTextBoxColumn.DataPropertyName = "trans_type";
-            transtypeDataGridViewTextBoxColumn.HeaderText = "Type";
-            transtypeDataGridViewTextBoxColumn.Name = "transtypeDataGridViewTextBoxColumn";
-            transtypeDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // quantityDataGridViewTextBoxColumn
-            // 
-            quantityDataGridViewTextBoxColumn.DataPropertyName = "quantity";
-            quantityDataGridViewTextBoxColumn.HeaderText = "QTY";
-            quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
-            quantityDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // Total
-            // 
-            Total.DataPropertyName = "Total";
-            Total.HeaderText = "Total";
-            Total.Name = "Total";
-            Total.ReadOnly = true;
-            Total.Width = 80;
-            // 
-            // customerFriendlyNameDataGridViewTextBoxColumn
-            // 
-            customerFriendlyNameDataGridViewTextBoxColumn.DataPropertyName = "CustomerFriendlyName";
-            customerFriendlyNameDataGridViewTextBoxColumn.HeaderText = "Contact";
-            customerFriendlyNameDataGridViewTextBoxColumn.Name = "customerFriendlyNameDataGridViewTextBoxColumn";
-            customerFriendlyNameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // warprodidDataGridViewTextBoxColumn
-            // 
-            warprodidDataGridViewTextBoxColumn.DataPropertyName = "war_prod_id";
-            warprodidDataGridViewTextBoxColumn.HeaderText = "war_prod_id";
-            warprodidDataGridViewTextBoxColumn.Name = "warprodidDataGridViewTextBoxColumn";
-            warprodidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // userIdDataGridViewTextBoxColumn
-            // 
-            userIdDataGridViewTextBoxColumn.DataPropertyName = "userId";
-            userIdDataGridViewTextBoxColumn.HeaderText = "userId";
-            userIdDataGridViewTextBoxColumn.Name = "userIdDataGridViewTextBoxColumn";
-            userIdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // customerIdDataGridViewTextBoxColumn
-            // 
-            customerIdDataGridViewTextBoxColumn.DataPropertyName = "customerId";
-            customerIdDataGridViewTextBoxColumn.HeaderText = "customerId";
-            customerIdDataGridViewTextBoxColumn.Name = "customerIdDataGridViewTextBoxColumn";
-            customerIdDataGridViewTextBoxColumn.Visible = false;
             // 
             // frmTransactions
             // 

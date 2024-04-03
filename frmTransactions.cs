@@ -96,6 +96,7 @@ namespace BlueAnaliticsWarehouse
             {
                 this.errorProvider1.SetError(cboWareHouse, "Please Select Warehouse");
                 this.errorProvider1.SetIconAlignment(cboWareHouse, ErrorIconAlignment.TopLeft);
+                
 
                 e.Cancel = true;
 
@@ -113,7 +114,7 @@ namespace BlueAnaliticsWarehouse
             {
 
                 this.errorProvider1.SetError(cboProducts, "Please Select Products");
-                this.errorProvider1.SetIconAlignment(cboProducts, ErrorIconAlignment.TopLeft);
+                this.errorProvider1.SetIconAlignment(cboProducts, ErrorIconAlignment.MiddleRight);
                 e.Cancel = true;
 
             }
@@ -327,6 +328,22 @@ namespace BlueAnaliticsWarehouse
             }
 
 
+        }
+
+        private void cboCustomer_Validating(object sender, CancelEventArgs e)
+        {
+            if (this.cboCustomer.SelectedIndex == -1)
+            {
+
+                this.errorProvider1.SetError(cboCustomer, "Customer can not be empty");
+                this.errorProvider1.SetIconAlignment(cboCustomer, ErrorIconAlignment.TopLeft);
+                e.Cancel = true;
+
+            }
+            else
+            {
+                this.errorProvider1.Clear();
+            }
         }
     }
 }

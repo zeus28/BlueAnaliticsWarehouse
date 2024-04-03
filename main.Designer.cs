@@ -1,4 +1,6 @@
-﻿namespace BlueAnaliticsWarehouse
+﻿using System.Diagnostics;
+
+namespace BlueAnaliticsWarehouse
 {
     partial class Main
     {
@@ -15,8 +17,12 @@
         {
             if (disposing && (components != null))
             {
+                foreach (var t in dictClickedForm)
+                {
+                    t.Value.Dispose();
+                }
                 components.Dispose();
-                this.TransactionForm.Dispose();
+
             }
             base.Dispose(disposing);
         }
@@ -47,7 +53,6 @@
             menuStrip1.Size = new Size(1043, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
-          
             // 
             // toolStripMenuItem1
             // 
@@ -61,7 +66,6 @@
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             transactionsToolStripMenuItem.Size = new Size(180, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
-           
             // 
             // toolStripMenuItem2
             // 
@@ -97,8 +101,9 @@
             MainMenuStrip = menuStrip1;
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "main";
+            Text = "Blue Warehouse";
             WindowState = FormWindowState.Maximized;
+            FormClosing += Main_FormClosing;
             Load += Main_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

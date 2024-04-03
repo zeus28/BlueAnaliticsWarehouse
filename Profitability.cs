@@ -79,7 +79,8 @@ namespace BlueAnaliticsWarehouse
             try
             {
 
-                using (var ctx = new BlueAnaliticsContext()) {
+                using (var ctx = new BlueAnaliticsContext())
+                {
 
 
                     var fromDate = new Microsoft.Data.SqlClient.SqlParameter("@fromDate", this.dtFrom.Value);
@@ -88,16 +89,30 @@ namespace BlueAnaliticsWarehouse
                     var warId = new Microsoft.Data.SqlClient.SqlParameter("@warId", Convert.ToInt32(cboWarehouse.SelectedValue));
 
                     var qparams = new SqlParameter[] { fromDate, toDate, warId, productId };
-                      
 
-                    var r = ctx.Database.SqlQueryRaw<ProfitabilityDTO>("exec [dbo].[getProfitabilityData] @fromDate,@toDate,@warId, @productId " , qparams).ToList();
+
+                    var r = ctx.Database.SqlQueryRaw<ProfitabilityDTO>("exec [dbo].[getProfitabilityData] @fromDate,@toDate,@warId, @productId ", qparams).ToList();
                     this.dataGridView1.DataSource = r;
 
                 }
 
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void cboWarehouse_Validating(object sender, CancelEventArgs e)
+        {
+            if (cboWarehouse.SelectedIndex == -1) {
+
+                this.errorProvider1.SetError(cboWarehouse, "Please Select Warehouse");
+                this.errorProvider1.SetIconAlignment(cboProducts, ErrorIconAlignment.MiddleRight);
+                e.Cancel = true;
+            }
+            else{
+                this.errorProvider1.Clear();
             }
         }
     }
